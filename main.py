@@ -122,23 +122,27 @@ class FileProcessor:
     def normalize_text(self, text, capitalize_all_words=False):
         """
         Normalize the provided text:
-        - Capitalize the first character of the text and any character following ". ".
-        - If capitalize_all_words=True, also capitalize characters after spaces (for cities with multiple words).
+        - Capitalize the first character of the text and any character following ". ", "! ", or "? ".
+        - If capitalize_all_words=True, capitalize characters after every space (useful for city names).
         """
-        normalized_text = text.lower()  # Convert the entire text to lowercase
-        result = ""  # Initialize an empty string to store the normalized result
-        capitalize_next = True  # Start by capitalizing the first letter
+        normalized_text = text.lower()  # Convert all text to lowercase
+        result = ""  # Initialize an empty string for the normalized output
+        capitalize_next = True  # Start by capitalizing the first character
 
-        for char in normalized_text:  # Iterate through each character in the text
-            if capitalize_next:  # If the flag is set, capitalize the character
+        # Iterate through each character in the text
+        for i, char in enumerate(normalized_text):
+            if capitalize_next and char.isalpha():  # If flag is set and the character is alphabetic
                 result += char.upper()
                 capitalize_next = False  # Reset the flag
             else:
                 result += char  # Otherwise, add the character as is
 
-            if char == ".":  # Set the flag after a period (end of a sentence)
-                capitalize_next = True
-            elif capitalize_all_words and char == " ":  # Set the flag after spaces if capitalize_all_words=True
+            # Check for sentence-ending punctuation
+            if char in [".", "!", "?"]:  # If the character is one of the end-of-sentence markers
+                capitalize_next = True  # Set the flag to capitalize the next non-space character
+
+            # Handle capitalization after spaces (optional, if requested)
+            elif capitalize_all_words and char == " ":
                 capitalize_next = True
 
         return result  # Return the fully normalized text

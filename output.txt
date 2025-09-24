@@ -1,7 +1,16 @@
 News Feed App
 
 News ------------------------
-It's sunny. i like it so much. yeah
+Today it's raining! take your umbrella.
 Gliwice
-Published on: 19/09/2025
+Published on: 24/09/2025
+
+Private Ad ------------------------
+I want to sell a bike!   It's a beautiful bike
+Actual until: 2026-02-02, 131 days left
+
+News ------------------------
+Today it's raining! Take your umbrella.
+Warszawa
+Published on: 24/09/2025
 
